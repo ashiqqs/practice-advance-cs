@@ -1,0 +1,4 @@
+
+1. C# doesn't support multiple base class but multilevel base is supported.
+2. Base class constructor is called before derived class constructor.
+3. Controlling base class constructor from derived class constructor using :base keyword

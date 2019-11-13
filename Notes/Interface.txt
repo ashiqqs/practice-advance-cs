@@ -1,0 +1,6 @@
+
+1. Interface can't contain field.
+2. Interface is only for method declaration.
+3. Interface can't contain method definition.
+4. multiple interface can be inherited.
+5. Interface instance can't be created but interface ref_variable can be refer derived class object.

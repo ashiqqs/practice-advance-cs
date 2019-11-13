@@ -1,0 +1,4 @@
+1.value type parameter
+2.ref type parameter
+3.out type parameter
+4.array type parameter

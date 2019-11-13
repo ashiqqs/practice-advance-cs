@@ -1,0 +1,35 @@
+ //Multicast Delegate
+    class Program
+    {
+        public delegate void MyDelegate();
+        public static void Main(string[] args)
+        {
+            //MyDelegate del1, del2, del3, del4;
+            //Difference Instance way
+            //del1 = new MyDelegate(methodOne);
+            //del2 = new MyDelegate(methodTwo);
+            //del3 = new MyDelegate(methodThree);
+            //del4 = del1 + del2 + del3 - del2;
+            //del4();
+            
+            //Same Instance way
+            MyDelegate del = new MyDelegate(methodOne);
+            del += methodTwo;
+            del += methodThree;
+            del();
+
+            Console.ReadKey();
+        }
+        public static void methodOne()
+        {
+            Console.WriteLine("This is Method One");
+        }
+        public static void methodTwo()
+        {
+            Console.WriteLine("This is Method Two");
+        }
+        public static void methodThree()
+        {
+            Console.WriteLine("This is Method Three");
+        }
+    }

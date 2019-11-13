@@ -1,0 +1,14 @@
+
+1. Hide base class method from derived class using #new keyword.
+2. Call hided base class method by type casting
+3. Base class reference can point to derived class, but derived class reference variable can't be pont to base class
+Example:
+	public class Parent{
+		//
+	}
+	public class Child:Parent{
+		//
+	}
+	
+	Parent parent = new Child();
+	Child child = new Parent(); //Not possible

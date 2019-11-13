@@ -1,0 +1,6 @@
+
+1. Structs are value type & classes are reference type
+2. Structs are store in stack & classes are stored in heap
+3. Value type will be lost out of scope & reference type ref_variable will lost in out of scope
+	but object goes to garbage collection.
+3. Struct is a sealed type that can't be inherited & Class are not sealed by default.

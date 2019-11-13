@@ -1,0 +1,5 @@
+
+1. Static field shared value of allocated value.
+2. Instance field allocate new memory for every object.
+3. Static constructor are not allowed access modifier.
+4 Static constructor are called when any static field/member are called.

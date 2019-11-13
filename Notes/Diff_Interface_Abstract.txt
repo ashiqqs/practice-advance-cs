@@ -1,0 +1,5 @@
+
+1. Abstract class can contains members definition & Interface has only declaration.
+2. Abstract class are private by default & Interface are public by default
+3. Abstract class can have fields, Interface can't have any field.
+4. Abstract class can inherit another interface or abstract class but Interface can inherit only another interface

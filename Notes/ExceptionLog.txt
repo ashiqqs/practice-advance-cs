@@ -1,0 +1,6 @@
+FormatException
+Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at PracticeAdvanceCS.Program.Main(String[] args) in I:\PracticeBasicCS\Program.cs:line 21
