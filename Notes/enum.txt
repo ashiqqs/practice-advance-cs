@@ -1,15 +1,9 @@
-﻿using PracticeAdvanceCS.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+//enum is strongly type constant
+//enum is value type
+//enum use to hold a set of integral number with text
 
-namespace PracticeAdvanceCS
-{
-    //Enum
+//Example:
+
     class Program
     {
         public static void Main(string[] args)
@@ -40,4 +34,3 @@ namespace PracticeAdvanceCS
         Female=2,
         Unknown=0
     }
-}
