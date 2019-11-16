@@ -50,5 +50,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AssemblyOne\AssemblyOne.csproj">
+      <Project>{f67fdd2b-1d1f-4b68-bb5d-8ba12b0458a8}</Project>
+      <Name>AssemblyOne</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AssemblyTwo\AssemblyTwo.csproj">
+      <Project>{5fbc95e9-dd2c-4416-a8be-44e3d7219e4a}</Project>
+      <Name>AssemblyTwo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

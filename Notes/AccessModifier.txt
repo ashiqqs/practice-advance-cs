@@ -1,0 +1,57 @@
+//There are 5 different access modifiers in c#, these are public, private, protected, internal, protected internal
+//internal is default access modifier of type and private is default access modifier of type's member 
+//private, protected and protected internal cannot be declared for type
+//public members are available any where.
+//private members are available only in the containing type.
+//protected members are avalable, with in the containing type and the types that derive from the containing type.
+//internal members are available anywhere within the containing assembly.
+//protected internal are available anywhere within the containing assemble,
+	and from within a derived class in any other assembly
+
+
+
+
+
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            AssemblyTwoClassOne ATCO = new AssemblyTwoClassOne();
+            Console.WriteLine(ATCO.GetProtectedInternal());
+            Console.ReadKey();
+        }
+    }
+
+    public class AssemblyOneClassOne
+    {
+        internal string InternalProperty { get; set; }
+        protected internal string ProtectedInternalProperty { get; set; }
+    }
+    public class AssemblyOneClassTwo
+    {
+        internal string GetInternalProperty()
+        {
+            AssemblyOneClassOne AOCO = new AssemblyOneClassOne
+            {
+                InternalProperty = "I am Internal",
+            };
+            return AOCO.InternalProperty;
+        }
+
+        protected internal string GetProtectedInternalProperty()
+        {
+            AssemblyOneClassOne AOCO = new AssemblyOneClassOne
+            {
+                ProtectedInternalProperty = "I am Protected Internal"
+            };
+            return AOCO.ProtectedInternalProperty;
+        }
+    }
+    public class AssemblyTwoClassOne : AssemblyOneClassTwo
+    {
+        public string GetProtectedInternal()
+        {
+            AssemblyOneClassTwo AOCT = new AssemblyOneClassTwo();
+            return base.GetProtectedInternalProperty();
+        }
+    }
