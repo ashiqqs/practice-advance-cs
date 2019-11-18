@@ -1,0 +1,44 @@
+
+//Attribute allow to declarative information for programs.
+//This information can then be queried at runtime using reflection
+//Example
+	1. [Obsolate]
+	2. [HttpGet]
+	3. [Serializable]
+
+ //Attribute
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            int obsolateResult = Calculator.Add(45, 23, 54);
+            int updatedResult = Calculator.Add(true, 23, 34, 45, 456, 56);
+            Console.ReadKey();
+        }
+    }
+
+    public class Calculator
+    {
+        [Obsolete("Use Add(bool doPrint,params int[] num)", false)]
+        public static int Add(int num1, int num2, int num3)
+        {
+            return num1 + num2 + num3;
+        }
+        public static int Add(bool doPrint,params int[] num)
+        {
+            int sum = 0;
+            foreach(int n in num)
+            {
+                if (doPrint)
+                {
+                    Console.Write(n + " + ");
+                }
+                sum += n;
+            }
+            if (doPrint)
+            {
+                Console.Write(" = " + sum);
+            }
+            return sum;
+        }
+    }

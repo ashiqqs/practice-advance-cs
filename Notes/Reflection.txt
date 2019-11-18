@@ -1,10 +1,15 @@
-﻿
-using System;
-using System.Reflection;
+//Reflection is the process of describing the metadata of types,
+	methods and fields in a code.
+	The namespace System.Reflection enables to obtain data about the loaded assemblies,
+	the elements within them like classes, methods and value types.
+//Uses
+	1. IDE or UI design
+	2. Late binding
 
-namespace PracticeAdvanceCS
-{
-    //EarlyBinding vs LateBinding
+Example:
+
+//EarlyBinding vs LateBinding
+//LateBinding have no sense in compile time error.
     class Program
     {
         public static void Main(string[] args)
@@ -42,5 +47,3 @@ namespace PracticeAdvanceCS
         }
 
     }
-
-}

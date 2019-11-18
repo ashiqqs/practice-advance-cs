@@ -1,0 +1,85 @@
+//To get Information of an object
+//Use of Type class
+    class MyClass
+    {
+        public static void Main(string[] args)
+        {
+            //Type objType = Type.GetType("PracticeAdvanceCS.Student");
+            //Type objType = typeof(Student);
+            Type objType = (new Student()).GetType();
+
+            ConstructorInfo[] constructors = objType.GetConstructors();
+            FieldInfo[] fields = objType.GetFields();
+            PropertyInfo[] properties = objType.GetProperties();
+            MethodInfo[] methods = objType.GetMethods();
+
+            Console.WriteLine("Type: ");
+            Console.WriteLine($"FullName: {objType.FullName}, Name: {objType.Name}");
+
+            Console.WriteLine();
+            Console.WriteLine("Fields: ");
+            foreach(FieldInfo field in fields)
+            {
+                Console.WriteLine($"Type: {field.FieldType.Name}, Name: {field.Name}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Propertirs: ");
+            foreach (PropertyInfo property in properties)
+            {
+                Console.WriteLine($"Type: {property.PropertyType.Name}, Name: {property.Name}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Methods: ");
+            foreach (MethodInfo method in methods)
+            {
+                Console.WriteLine($"Type: {method.ReturnType.Name}, Name: {method.Name}, Parameters: ");
+                ParameterInfo[] parameters = method.GetParameters();
+                foreach(ParameterInfo param in parameters)
+                {
+                    Console.Write($"\t type: {param.ParameterType.Name}, name: {param.Name}, position:{param.Position}");
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Constructors: ");
+            foreach (ConstructorInfo constructor in constructors)
+            {
+                Console.WriteLine($"Name: {constructor.Name}, Parameters: ");
+                ParameterInfo[] parameters = constructor.GetParameters();
+                foreach (ParameterInfo param in parameters)
+                {
+                    Console.Write($"type: {param.ParameterType.Name}, name: {param.Name}, position:{param.Position}");
+                }
+            }
+
+            Console.ReadKey();
+        }
+    }
+
+    public class Student
+    {
+        private string _name;
+        private string _roll;
+        public int Id { get; set; } 
+        public string Reg { get; set; }
+        public Student(string name)
+        {
+            this._name = name;
+        }
+        public Student()
+        {
+        }
+        public void Print()
+        {
+            Console.WriteLine("Id: {0}", this.Id);
+            Console.WriteLine("Name: {0}", this._name);
+            Console.WriteLine("Roll: {0}", this._roll);
+        }
+        public string GetById(int id)
+        {
+            return $"StudentId: {id}, Name: ";
+        }
+
+    }
