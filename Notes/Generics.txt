@@ -1,0 +1,35 @@
+
+using System;
+using System.Reflection;
+
+namespace PracticeAdvanceCS
+{
+    //Generic Type
+    /*
+    To make a class, interface, delegate or method in dynamic with type safe.
+        User can change the type in call time
+        */
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine(Calculator<int>.IsEqual('A', 'a'));
+            Console.WriteLine(Calculator<int>.IsEqual(1,11));
+            Console.ReadKey();
+        }
+    }
+
+    public class Calculator<T>
+    {
+        public static bool IsEqual(T firstItem, T secondItem)
+        {
+            return firstItem.Equals(secondItem);
+        }
+        public static bool IsEqual2<A>(A firstItem, A secondItem)
+        {
+            return firstItem.Equals(secondItem);
+        }
+
+    }
+
+}
