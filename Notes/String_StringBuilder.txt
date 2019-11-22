@@ -1,0 +1,4 @@
+
+//String is immutable & StringBuilder is mutable.
+//StringBuilder serve better performance than string
+//string create new object during every concatation & StringBuilder hold one object for every append

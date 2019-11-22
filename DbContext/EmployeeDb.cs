@@ -4,26 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracticeAdvanceCS.Models
+namespace PracticeAdvanceCS.EmployeePart
 {
     public delegate bool SeniorChecker(Employee employee);
-
-    //Region #Fields #Properties #Method
-    public class Employee
+    public partial class Employee
     {
-        #region Fields
-        private int _id;
-        private string _name;
-        #endregion
-
-        #region Properties
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Salary { get; set; }
-        public int Experience { get; set; }
-        #endregion
-
-        #region Method
+        public Employee(int id, string name)
+        {
+            this.Id = id;
+            this.Name = name;
+        }
+        public void GetEmpBasicInfo()
+        {
+           Console.Write($"Id: {this.Id}, Name: {this.Name}");
+        }
         public static void GetFilteredEmployee(List<Employee> employess, SeniorChecker seniorChecker)
         {
             foreach (Employee emp in employess)
@@ -34,7 +28,5 @@ namespace PracticeAdvanceCS.Models
                 }
             }
         }
-        #endregion
     }
-
 }
