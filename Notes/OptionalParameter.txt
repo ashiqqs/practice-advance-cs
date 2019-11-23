@@ -1,0 +1,40 @@
+//There are four way to make parameter optional
+
+//using params array
+	public void Add(int firstNumber, int secondNumber, params int[] moreNumbers) { }
+//---------------------------------------------------------------------------------------
+
+//using overloading
+	public void Add(int firstNumber, int secondNumber, int[] moreNumbers) { }
+	public void Add(int firstNumber, int secondNumber)
+	{
+    		Add(firstNumber, secondNumber, null);
+       	}
+//---------------------------------------------------------------------------------------
+
+//Specifying parameter
+public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Print(2, moreNumbers:new int[] { 2, 3, 4, 5 });
+            Console.ReadKey();
+        }
+        public static void Print(int firstNumber, int secondNumber=10, int[] moreNumbers=null) {
+            Console.WriteLine("firstNumber = " + firstNumber);
+            Console.WriteLine("secondNumber = " + secondNumber);
+            if (moreNumbers != null)
+            {
+                foreach (int i in moreNumbers)
+                {
+                    Console.WriteLine("another = " + i);
+                }
+            }
+        }
+        
+    }
+//--------------------------------------------------------------------------------------------
+
+//using [Optional] Attribute from System.Runtime.InteropServices namespace
+	public static void Print(int firstNumber, [Optional]int secondNumber) {}
+//----------------------------------------------------------------------------------

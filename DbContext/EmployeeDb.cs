@@ -14,6 +14,9 @@ namespace PracticeAdvanceCS.EmployeePart
             this.Id = id;
             this.Name = name;
         }
+        public Employee()
+        {
+        }
         public void GetEmpBasicInfo()
         {
            Console.Write($"Id: {this.Id}, Name: {this.Name}");

@@ -1,7 +1,6 @@
-﻿using PracticeAdvanceCS.EmployeePart;
+using PracticeAdvanceCS.EmployeePart;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PracticeAdvanceCS
 {
@@ -9,30 +8,10 @@ namespace PracticeAdvanceCS
     {
         public static void Main(string[] args)
         {
-            Dictionary<int, string> dictionaries = new Dictionary<int,string>();
-            dictionaries.Add(1, "Ashiq");
-            dictionaries.Add(2, "Shopon");
-            dictionaries.Add(3, "Md Ashiqur Rahman Shopon");
-            foreach (KeyValuePair<int, string> item in dictionaries)
-            {
-                Console.WriteLine($"Id: {item.Key}, Name: {item.Value}");
-            }
-            //Using TryGetValue function escape exception
-            string name = dictionaries.TryGetValue(4, out name)?name:"Not found";
-            Console.WriteLine(name);
-            int totalItem = dictionaries.Count;
-            Console.WriteLine($"TotalItem = {totalItem}");
-
-            List<string> items = new List<string>();
-            items.Add("Item1");
-            items.Add("Item2");
-            items.Add("Item3");
-            Dictionary<int, string> listToDictionaries = items.ToDictionary(c => c.Length, c => c);
-
+            Company company = new Company();
+            Console.WriteLine($"Before Update:{company[1]}, After Update:{company[1,"Ashiqur Rahman"].Name}");
             Console.ReadKey();
         }
-        
-        
     }
 
     public class Company
