@@ -1,0 +1,87 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace PracticeAdvanceCS
+{
+//Type of List Sorting
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            List<Student> students = new List<Student> {
+                new Student{Id=1013, Name="Mark", DueFee=2500},
+                new Student{Id=1320, Name="Alex", DueFee=1900},
+                new Student{Id=1231, Name="Sam", DueFee = 2800},
+                new Student{Id=1020, Name="David", DueFee=1200},
+                new Student{Id=1102, Name="Jay Setty", DueFee=1500},
+            };
+            //Default SortOrder Using ICompareable interface
+            Console.WriteLine("Default SortOrder by Name Using ICompareable interface");
+            Console.WriteLine("-----------------------------------------");
+            students.Sort();
+            students.Reverse();
+            foreach (var std in students)
+            {
+                Console.WriteLine($"Id:{std.Id}, Name: {std.Name}, Due: {std.DueFee}");
+            }
+
+            //Sort By Custom SortOrder Class
+            Console.WriteLine("Sort By DueFee using Custom SortOrder Class");
+            Console.WriteLine("-----------------------------------------");
+            students.Sort(new SortByDueFee());
+            students.Reverse();
+            foreach (var std in students)
+            {
+                Console.WriteLine($"Id:{std.Id}, Name: {std.Name}, Due: {std.DueFee}");
+            }
+
+            //SortBY ComparismDelegate
+            Console.WriteLine("Sort By Id Delegate Comparison");
+            Console.WriteLine("-----------------------------------------");
+            Comparison<Student> comparisonDelegate = new Comparison<Student>(Student.SortById);
+            //students.Sort(comparisonDelegate);
+
+            //Another way to sort using delegate
+            //students.Sort(delegate (Student s1, Student s2) { return s1.Id.CompareTo(s2.Id); });
+            //Another way using delegate with Linq
+            students.Sort((s1, s2) => s1.Id.CompareTo(s2.Id));
+            foreach (var std in students)
+            {
+                Console.WriteLine($"Id:{std.Id}, Name: {std.Name}, Due: {std.DueFee}");
+            }
+
+
+            Console.ReadKey();
+        }
+    }
+
+    //Creating A complex type as Sortable
+    public class Student : IComparable<Student>
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int DueFee { get; set; }
+
+        public int CompareTo(Student other)
+        {
+            return this.Name.CompareTo(other.Name);
+        }
+        public static int SortById(Student s1, Student s2)
+        {
+            return s1.Id.CompareTo(s2.Id);
+        }
+    }
+
+    //Creating Custom Sort field
+    public class SortByDueFee : IComparer<Student>
+    {
+        public int Compare(Student s1, Student s2)
+        {
+            if (s1.DueFee > s2.DueFee) return 1;
+            else if (s1.DueFee < s2.DueFee) return -1;
+            else return 0;
+        }
+    }
+}
