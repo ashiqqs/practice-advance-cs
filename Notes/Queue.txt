@@ -1,0 +1,28 @@
+//Queue First in First Out (FIFO)
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Student student1 = new Student { Id = 1013, Name = "Mark", DueFee = 2500 };
+            Student student2 = new Student { Id = 1320, Name = "Alex", DueFee = 1900 };
+            Student student3 = new Student { Id = 1231, Name = "Sam", DueFee = 2800 };
+
+            Queue<Student> queueStudents = new Queue<Student>();
+            queueStudents.Enqueue(student1);
+            queueStudents.Enqueue(student2);
+            queueStudents.Enqueue(student3);
+
+            //Dequeue retrive first item with removing
+            Student s1 = queueStudents.Dequeue();
+            Console.WriteLine($"Exist: {queueStudents.Count} student, Retrived: {s1.Name}");
+            Student s2 = queueStudents.Dequeue();
+            Console.WriteLine($"Exist: {queueStudents.Count} student, Retrived: {s2.Name}");
+
+            //Peek retrive first item without removing
+            Student s3 = queueStudents.Peek();
+            Console.WriteLine($"Exist: {queueStudents.Count} student, Peeked: {s3.Name}");
+
+
+            Console.ReadKey();
+        }
+    }

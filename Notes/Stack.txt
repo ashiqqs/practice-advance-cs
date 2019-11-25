@@ -1,12 +1,4 @@
-﻿using PracticeAdvanceCS.EmployeePart;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-
-namespace PracticeAdvanceCS
-{
-    //Stack  Last in First Out (LIFO)
+ //Stack  Last in First Out (LIFO)
     public class Program
     {
         public static void Main(string[] args)
@@ -36,32 +28,3 @@ namespace PracticeAdvanceCS
             Console.ReadKey();
         }
     }
-
-    //Creating A complex type as Sortable
-    public class Student : IComparable<Student>
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int DueFee { get; set; }
-
-        public int CompareTo(Student other)
-        {
-            return this.Name.CompareTo(other.Name);
-        }
-        public static int SortById(Student s1, Student s2)
-        {
-            return s1.Id.CompareTo(s2.Id);
-        }
-    }
-
-    //Creating Custom Sort field
-    public class SortByDueFee : IComparer<Student>
-    {
-        public int Compare(Student s1, Student s2)
-        {
-            if (s1.DueFee > s2.DueFee) return 1;
-            else if (s1.DueFee < s2.DueFee) return -1;
-            else return 0;
-        }
-    }
-}
