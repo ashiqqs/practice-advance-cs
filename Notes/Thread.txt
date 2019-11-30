@@ -1,0 +1,42 @@
+ //Advantage
+    //Thread is a light weigh process that can make application more responsive user interface
+    //To make efficient use of processor time while waiting for I/O operation to complete
+
+    //Disadvantage
+    //On a single processor/core machine threading can be effect performance negatively as there is overhead involved context switching
+    //Multithread application are difficult to write, understand and debug and maintain
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Thread stopProcessThred = new Thread(new ParameterizedThreadStart(StopProcess));
+            string password="";
+            do
+            {
+                Console.Write("\nEnter password: ");
+                password = Console.ReadLine();
+                if (password.CompareTo("12345") != 0)
+                {
+                    for(int i=0; i<30; i++)
+                    {
+                        Console.Write("~");
+                        Thread.Sleep(50);
+                        //stopProcessThred.Start(1500); //Thread uploaded to another process
+                    }
+                    Console.WriteLine("\nIncorrect password! try again!");
+                }
+            } while (password.CompareTo("12345") != 0);
+            Console.WriteLine("Congratulation! Login Success...");
+
+            Console.ReadKey();
+        }
+        private static void StopProcess(object secParam)
+        {
+            int sec = 0;
+            if(int.TryParse(secParam.ToString(), out sec))
+            {
+                Thread.Sleep(sec);
+            }
+        }
+    }

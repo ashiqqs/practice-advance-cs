@@ -1,0 +1,46 @@
+
+    //Thread join and IsAlive
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Main Thread Started...");
+
+            Thread threadOne = new Thread(Program.ThreadOne);
+            threadOne.Start();
+            threadOne.Join();
+
+            Thread threadTwo = new Thread(Program.ThreadTwo);
+            threadTwo.Start();
+            Console.WriteLine("Waiting 3 sec for ThreadTwo");
+            bool isCompleted = threadTwo.Join(3000);
+            for (int i = 0; i <= 10; i++)
+                {
+                if (threadTwo.IsAlive)
+                {
+                    Thread.Sleep(50);
+                    Console.WriteLine("wait...");
+                }
+                else
+                {
+                    Console.WriteLine("Thread2 Completed in 3 sec");
+                    break;
+                }
+            }
+            if (isCompleted == false)
+            {
+                Console.WriteLine("Failed to completed thread2 in 3 sec");
+            }
+            Console.WriteLine("Main Thread completed!");
+            Console.ReadKey();
+        }
+        private static void ThreadOne()
+        {
+            Console.WriteLine("Thread One Completed!");
+        }
+        private static void ThreadTwo()
+        {
+            Thread.Sleep(4000);
+            Console.WriteLine("Thread Two Completed!");
+        }
+    }
