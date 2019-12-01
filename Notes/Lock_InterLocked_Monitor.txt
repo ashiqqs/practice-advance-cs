@@ -24,16 +24,29 @@
 
             //Console.ReadKey();
         }
-        //static object _lock = new object();
+        static object _lock = new object();
         private static void AddOneMillion()
         {
             for (int i = 1; i <= 1000000; i++)
             {
-                Interlocked.Increment(ref total); //Better performance
+                //Interlocked.Increment(ref total); //Better performance
                 //lock (_lock)
                 //{
                 //    total++;
                 //}
+
+                bool lockTaken = false;
+                Monitor.Enter(_lock, ref lockTaken);
+                try{
+                    total++;
+                }
+                finally
+                {
+                    if (lockTaken)
+                    {
+                        Monitor.Exit(_lock);
+                    }
+                }
             }
         }
        

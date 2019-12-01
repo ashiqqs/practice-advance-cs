@@ -1,0 +1,97 @@
+using PracticeAdvanceCS.EmployeePart;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+
+namespace PracticeAdvanceCS
+{
+    //Deadlock Situation in Multithreading
+    //Thread1 locked accountA and trying to access accountA
+    //At the same time Thread2 locked accountB and trying to access accountB
+    /* Now,
+     thread1 trying to access and lock accountB,
+     at the same time thread2 trying to access and lock accountA
+     In this situation proccession occured Deadlock
+    */
+
+    public class Program
+    {
+       public static void Main(string[] args)
+        {
+            Console.WriteLine("Main Started...");
+            Account accountA = new Account(101, 5000);
+            Account accountB = new Account(102, 2000);
+
+            AccountManager accManagerA = new AccountManager(accountA, accountB, 1000);
+            Thread thread1 = new Thread(accManagerA.Transfer);
+            thread1.Name = "thread1, Account Manager A";
+
+            AccountManager accManagerB = new AccountManager(accountB, accountA, 2000);
+            Thread thread2 = new Thread(accManagerB.Transfer);
+            thread2.Name = "thread2, Account Manager B";
+
+            thread1.Start();
+            thread2.Start();
+
+            thread1.Join();
+            thread2.Join();
+
+            Console.WriteLine("Main completed!");
+
+            Console.ReadKey();
+        }
+    }
+
+    public class Account
+    {
+        public Account(int id, double balance)
+        {
+            Id = id;
+            Balance = balance;
+        }
+        public int Id { get; set; }
+        public double Balance { get; set; }
+        public void Withdraw(double amount)
+        {
+            Balance -= amount;
+        }
+        public void Deposit(double amount)
+        {
+            Balance += amount;
+        }
+    }
+
+    public class AccountManager
+    {
+        public AccountManager(Account fromAcc, Account toAcc, double transferAmount)
+        {
+            FromAccount = fromAcc;
+            ToAccount = toAcc;
+            AmountToTransfer = transferAmount;
+        }
+        Account FromAccount { get; set; }
+        Account ToAccount { get; set; }
+        double AmountToTransfer { get; set; }
+        public void Transfer()
+        {
+            Console.WriteLine($"{Thread.CurrentThread.Name} trying to acquire lock on {FromAccount.Id.ToString()}");
+            lock (FromAccount)
+            {
+                Console.WriteLine($"{Thread.CurrentThread.Name} acquired lock on {FromAccount.Id.ToString()}");
+                Console.WriteLine($"{Thread.CurrentThread.Name} suspende for 1 sec");
+                //Thread.Sleep(1);
+                Console.WriteLine($"{Thread.CurrentThread.Name} back on action and trying to acquire lock on {ToAccount.Id.ToString()}");
+                lock (ToAccount)
+                {
+                    Console.WriteLine("This will not execute for Deadlock!");
+                    FromAccount.Withdraw(AmountToTransfer);
+                    ToAccount.Deposit(AmountToTransfer);
+                }
+            }
+        }
+
+    }
+}

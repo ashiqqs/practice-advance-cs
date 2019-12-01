@@ -1,0 +1,49 @@
+ //Performance in Multithread
+    public class Program
+    {
+       public static void Main(string[] args)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            SumOfEven();
+            SumOfOdd();
+            stopwatch.Stop();
+            Console.WriteLine($"Without Thread time required= {stopwatch.ElapsedMilliseconds} milisecond");
+            Console.WriteLine("-------------------------------------------");
+            Stopwatch stopwatch2 = Stopwatch.StartNew();
+            Thread evenThread = new Thread(SumOfEven);
+            Thread oddThread = new Thread(SumOfOdd);
+            evenThread.Start();
+            oddThread.Start();
+            evenThread.Join();
+            oddThread.Join();
+            stopwatch2.Stop();
+            Console.WriteLine($"With Thread time required = {stopwatch2.ElapsedMilliseconds} milisecond");
+
+
+            Console.ReadKey();
+        }
+        public static void SumOfEven()
+        {
+            double sum = 0;
+            for(int i=1; i<=1000000; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    sum += i;
+                }
+            }
+            Console.WriteLine($"Sum of Even(1--1000000) = {sum}");
+        }
+        public static void SumOfOdd()
+        {
+            double sum = 0;
+            for (int i = 1; i <= 1000000; i++)
+            {
+                if (i % 2 != 0)
+                {
+                    sum += i;
+                }
+            }
+            Console.WriteLine($"Sum of Odd(1--1000000) = {sum}");
+        }
+    }

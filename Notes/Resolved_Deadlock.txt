@@ -1,4 +1,4 @@
-﻿using PracticeAdvanceCS.EmployeePart;
+using PracticeAdvanceCS.EmployeePart;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,26 +8,40 @@ using System.Threading;
 
 namespace PracticeAdvanceCS
 {
-    //Lamda
+    //Deadlock Situation in Multithreading
+    //Thread1 locked accountA and trying to access accountA
+    //At the same time Thread2 locked accountB and trying to access accountB
+    /* Now,
+     thread1 trying to access and lock accountB,
+     at the same time thread2 trying to access and lock accountA
+     In this situation proccession occured Deadlock
+    */
+
     public class Program
     {
        public static void Main(string[] args)
         {
-            List<Employee> employees = new List<Employee>() {
-                new Employee{ Id=1, Name="Ashiq"},
-                new Employee{ Id=2, Name="Shakib"},
-                new Employee{Id=1, Name="Shopon"}
-            };
+            Console.WriteLine("Main Started...");
+            Account accountA = new Account(101, 5000);
+            Account accountB = new Account(102, 2000);
 
+            AccountManager accManagerA = new AccountManager(accountA, accountB, 1000);
+            Thread thread1 = new Thread(accManagerA.Transfer);
+            thread1.Name = "thread1";
 
-            //Employee employee = employees.Find((Employee emp )=> emp.Id == 2);
-            Employee employee = employees.Find(emp => emp.Id==2);
+            AccountManager accManagerB = new AccountManager(accountB, accountA, 2000);
+            Thread thread2 = new Thread(accManagerB.Transfer);
+            thread2.Name = "thread2";
 
-            Console.WriteLine($"Id = {employee.Id}, Name= {employee.Name}");
-            Console.WriteLine($"Name start with A = {employees.Count(emp => emp.Name.StartsWith("A"))}");
+            thread1.Start();
+            thread2.Start();
+
+            thread1.Join();
+            thread2.Join();
+
+            Console.WriteLine("Main completed!");
 
             Console.ReadKey();
-
         }
     }
 
