@@ -3,31 +3,46 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PracticeAdvanceCS
 {
-    //Lamda
+    //Asynchronous method
+    //Await
     public class Program
     {
        public static void Main(string[] args)
         {
-            List<Employee> employees = new List<Employee>() {
-                new Employee{ Id=1, Name="Ashiq"},
-                new Employee{ Id=2, Name="Shakib"},
-                new Employee{Id=1, Name="Shopon"}
-            };
+            Console.Write("Press Enter to Start count:");
+            Console.ReadLine();
 
+            OnPressEnter();
 
-            //Employee employee = employees.Find((Employee emp )=> emp.Id == 2);
-            Employee employee = employees.Find(emp => emp.Id==2);
-
-            Console.WriteLine($"Id = {employee.Id}, Name= {employee.Name}");
-            Console.WriteLine($"Name start with A = {employees.Count(emp => emp.Name.StartsWith("A"))}");
 
             Console.ReadKey();
+        }
 
+        public async static void OnPressEnter()
+        {
+            Task<int> task = new Task<int>(StartProcessToCountChar);
+            task.Start();
+            Console.WriteLine("Please wait while reading the file...");
+            int count = await task;
+            Console.WriteLine("Total Charecter = " + count);
+        }
+        private static int StartProcessToCountChar()
+        {
+            using(StreamReader reader = new StreamReader("I:\\PracticeBasicCS\\Program.cs"))
+            {
+                int count = 0;
+                string content = reader.ReadToEnd();
+                count = content.Length;
+                Thread.Sleep(5000);
+                return count;
+            }
         }
     }
 

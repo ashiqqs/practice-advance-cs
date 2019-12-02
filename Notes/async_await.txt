@@ -1,0 +1,35 @@
+//Asynchronous method
+    //Await
+    public class Program
+    {
+       public static void Main(string[] args)
+        {
+            Console.Write("Press Enter to Start count:");
+            Console.ReadLine();
+
+            OnPressEnter();
+
+
+            Console.ReadKey();
+        }
+
+        public async static void OnPressEnter()
+        {
+            Task<int> task = new Task<int>(StartProcessToCountChar);
+            task.Start();
+            Console.WriteLine("Please wait while reading the file...");
+            int count = await task;
+            Console.WriteLine("Total Charecter = " + count);
+        }
+        private static int StartProcessToCountChar()
+        {
+            using(StreamReader reader = new StreamReader("I:\\PracticeBasicCS\\Program.cs"))
+            {
+                int count = 0;
+                string content = reader.ReadToEnd();
+                count = content.Length;
+                Thread.Sleep(5000);
+                return count;
+            }
+        }
+    }
