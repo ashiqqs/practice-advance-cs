@@ -16,7 +16,7 @@
                 }
                 catch (Exception ex)
                 {
-                    string filePath = @"I:\PracticeBasicCS\Notesjk\ExceptionLog.txt";
+                    string filePath = @"I:\PracticeBasicCS\Notes\ExceptionLog.txt";
                     if (File.Exists(filePath))
                     {
                         StreamWriter streamWrite = new StreamWriter(filePath);

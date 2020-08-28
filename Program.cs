@@ -16,13 +16,42 @@ namespace PracticeAdvanceCS
     {
        public static void Main(string[] args)
         {
-            Console.Write("Press Enter to Start count:");
-            Console.ReadLine();
+            //Console.Write("Press Enter to Start count:");
+            //Console.ReadLine();
 
-            OnPressEnter();
+            // OnPressEnter();
+            //  Console.WriteLine(a);
 
-
-            Console.ReadKey();
+            int length = Convert.ToInt32(Console.ReadLine());
+            int[] arr = Console.ReadLine().Split(' ')
+                .Select(val => Convert.ToInt32(val)).ToArray();
+            int i, j, temp;
+            for(i=0; i<length; i++)
+            {
+                bool isSwapped = false;
+                for(j=0; i<length-i-1; j++)
+                {
+                    if (arr[j] > arr[j + 1])
+                    {
+                        temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                        isSwapped = true;
+                    }
+                }
+                if (!isSwapped) { break; }
+            }
+            int medianIndex = length / 2;
+            if (length % 2 != 0)
+            {
+                Console.WriteLine(arr[medianIndex+1]);
+            }
+            else
+            {
+                int median = (arr[medianIndex] + arr[medianIndex + 1]) / 2;
+                Console.WriteLine(median);
+            }
+            
         }
 
         public async static void OnPressEnter()
@@ -35,7 +64,8 @@ namespace PracticeAdvanceCS
         }
         private static int StartProcessToCountChar()
         {
-            using(StreamReader reader = new StreamReader("I:\\PracticeBasicCS\\Program.cs"))
+
+            using (StreamReader reader = new StreamReader("I:\\PracticeBasicCS\\Program.cs"))
             {
                 int count = 0;
                 string content = reader.ReadToEnd();
@@ -106,5 +136,14 @@ namespace PracticeAdvanceCS
             }
         }
 
+    }
+
+    public class Base
+    {
+        public string Parent { get; set; }
+    }
+    public class Derived : Base
+    {
+        public string  Child { get; set; }
     }
 }
